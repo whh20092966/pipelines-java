@@ -7,7 +7,7 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 steps:
-- task: Maven@1
+- task: Maven
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -18,12 +18,12 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
 
-- task: CopyFiles@2
+- task: CopyFiles
   inputs:
     contents: '**/*.war'
     targetFolder: '$(build.artifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@3
+- task: PublishBuildArtifacts
   inputs:
     artifactName: 'war'
     pathToPublish: '$(build.artifactStagingDirectory)'
